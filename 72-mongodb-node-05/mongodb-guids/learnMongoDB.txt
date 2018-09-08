@@ -1,0 +1,169 @@
+The IT Guy
+https://www.youtube.com/watch?v=dX835axhfK8&list=PLEUZTtBNFnBgJ7W93sGucH8aJ-HYQdT6O
+the default is c:\data\db (c:\log for errors)
+mongod --directoryperdb -- dbpath c:\mongodb\data\db  --logpath c:\mongodb\log\mongo.log --logappend --install
+
+start as an application run:  (lock the screen)
+mongodb
+listen mongodb://localhost:27017
+
+start as a service run:
+install
+mongod --logpath C:\data\log\mongo.log --install
+run:
+net start MongoDB // run as administrator
+stop:
+net stop MongoDB
+remove: 
+mongod --remove
+
+services.msc show services window
+
+show dbs
+use customers (if not exists create it)
+db - show used db (current)
+db.createUser(
+    {
+        user: 'dannypotter',
+        pwd: 'magicstick',
+        roles: ['readWrite','dbAdmin']
+
+        optionals
+        ---------
+        customData : { employeeID : 123}
+        authenticationRestrictions: [{
+            clinetSource: ['192.0.2.0'],
+            serverAddress: ['198.51.100.0']
+
+        }]
+        ---------
+    }
+)
+-- run it in the shell
+db.createUser(
+    {
+        user: 'dannypotter',
+        pwd: 'magicstick',
+        roles: ['readWrite','dbAdmin']
+)
+
+manipulate data:
+----------------
+
+create collection (table) (dynamic schema)
+db.createCollection('customer);    // {"ok" : 1}
+show collections // see the collection of customer
+
+insert data
+single document:
+db.customer.insert( { "firstname" : 'Harry', "lastname" : 'Potter' })  // WriteResult({ "nInserted" : 1 })
+db.customer.find(); // { "_id" : ObjectId("5b8bcc19dbab0340bdfb5deb"), "firstname" : "Harry", "lastname" : "Potter" }
+-- "_id" : ObjectId('') // creates unique id automaticaly
+multiple documents:
+db.customer.insert([
+                     { "firstname" : 'bilbo' , "lastname" : 'bagins'},
+                     { "firstname" : 'frudo' , "lastname" : 'bagins'}
+                   ]);
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+
+
+Dynamic schema: (add new info gender)
+db.customer.insert( { "firstname" : 'Merry', "lastname" : 'Popins' , "gender" : 'female'}) 
+
+add an object or arrays:
+db.customer.insert( {
+    "firstname" : 'Merry',
+    "lastname" : 'Popins' ,
+    "gender" : 'female',
+    address: { StreetNo : 'XYZ', ZipCode: 123456},
+    roles: ['Student' , 'SuperHero' ]
+})
+
+
+update:
+db.customer.update(
+     { "firstname" : 'Harry'} ,             // find this document
+     { firstname: "Danny" , gender: 'male' } // and update it with this
+); // have to specify again all fields otherwise it will eliminamed
+
+db.customer.update(
+     { "firstname" : 'Harry'} ,             // find this document
+    { $set : { firstname: "Danny" , gender: 'male' } } // for partial update update or add
+); 
+
+db.customer.update(
+     { "firstname" : 'Harry'} ,             // find this document
+    { $unset : { gender: 1 } } // unset removes the field with 1 - 1 for true
+
+);
+
+db.customer.update(
+     { "firstname" : 'Bambi'} ,             // find this document if not found
+     { firstname: 'Bambi' , lastname: 'Gross' ,gender: 'bambon' },  // upsert to add this if not found 
+     { upsert: 1}  // 1 or true
+); 
+
+WriteResult({
+        "nMatched" : 0,
+        "nUpserted" : 1,
+        "nModified" : 0,
+        "_id" : ObjectId("5b8be4e1c523650f64de7f48")
+})
+
+
+db.customer.update(
+     { "firstname" : 'Bambi'} ,             // find this document
+     { $rename { "firstname": "fname" },    // rename the name of firstname to fname for this key
+); 
+
+functions / methods
+
+sorting
+db.customer.find().sort(lastname: 1); // 1 asc -1 desc
+db.customer.find([{ optional condition}]).count();
+db.customer.find([{ optional condition}]).limit(n); // n = how many
+                    limit(10).sort({ field: [1 | -1]})
+db.customer.find().forEach(  function(param) { print("Customer Name: " + param.firstname) })
+
+
+delete data collections & database
+remove data:
+db.customer.remove({ field : value}) 
+db.customer.remove({ field : value}, { justOne: true })
+
+remove collecation
+db.customer.drop();
+
+remove database:
+db.dropDatabas();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+https://www.youtube.com/watch?v=YYnf5vJRuUY&list=PLC3y8-rFHvwh11bWtwm3_qKvo46uDmaal
+https://www.youtube.com/watch?v=V9kJbTFnhg4&list=PLjH_owXzFDn2oEr0Tph8vaJNv6p-OyG6u
+https://www.youtube.com/watch?v=vb8xZ-bvxbg&list=PLLAZ4kZ9dFpOFJ9JcVW9u4PlSWO-VFoao
+https://www.youtube.com/watch?v=swWRUvluSkE&list=PLGquJ_T_JBMQ1C0Pp41sykceli8G1UGtg
+https://www.youtube.com/watch?v=CaKoJ9rFo8c&list=PL9ooVrP1hQOFGaB3V9mvxR-y5UHjsH3bK
+https://www.youtube.com/watch?v=i57Fr5CgN4k&list=PLVqrmiXehhwwRuCd1B8OiBX9oFqygG34x

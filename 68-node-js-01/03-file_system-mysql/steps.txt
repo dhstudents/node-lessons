@@ -1,0 +1,10 @@
+npm init - create package.json for project
+npm install mysql --save
+
+
+    create table trips(
+        car_id int not null,
+        tdate date not null,
+        miles int not null,
+        primary key(car_id)
+    );

@@ -1,0 +1,8 @@
+Browser:
+window .console.log("ok");   in the browser
+
+Node:
+global
+module
+
+https://stackoverflow.com/questions/15406062/in-what-scope-are-module-variables-stored-in-node-js

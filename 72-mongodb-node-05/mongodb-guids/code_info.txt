@@ -1,0 +1,60 @@
+https://www.youtube.com/watch?v=wLNL2HTvcVw&index=2&list=PL4cUxeGkcC9jpvoYriLI0bY8DOgWZfi6u
+
+http://jsongen.pykaso.net/
+https://docs.mongodb.com/manual/
+
+https://nosqlbooster.com/downloads
+
+
+model 
+Schema - structure and types
+
+document
+ducuments -> collection
+collections -> database
+
+use <dbname>
+
+CREATE  COLLECTION
+db.createCollection('<collection name>')
+show collections
+
+// creates a collection if not exists
+db.mycollection.insert({ id: 1 , name : 'ddddd'})
+
+DELETE COLLECTION
+db.mycollection.drop();
+
+ADD DOCUMENTS (one or multiple)
+
+db.<collection>.insert() // _id : Objectid("dddddddd")
+db.<collection>.insertOne
+
+() // _id : Objectid("dddddddd")
+
+db.<collection>.find().[pretty()]
+db.<collection>.findOne()
+db.<collection>.find( { param : value, [param : vaule] ...})
+                    {"age" : { $lt: 30}}
+                    {"age" : { $lte: 30}}
+                    {"age" : { $gt: 30}}
+                    {"age" : { $gte: 30}}
+                    {"age" : { $eq: 30}}
+                    {"age" : { $ne: 30}}
+db.<collection>.find({} , {firstname: 1 , lasrname : 1 , _id : 0})
+                    .limit(n)
+                    .skip(n)
+                    .sort({lastname : 1 , age : -1}) // asc 1 , desc -1
+
+.find({creteria selection} , {fields to show : id: 0 , name : 1}) // 0 hide , 1 show
+
+
+.update({creteria to select} , { $set (sepecify properties)}, {multy: true})
+
+
+.remove( { _id: "ssssssss"}, [1])   // 1 for just one document
+
+
+
+
+

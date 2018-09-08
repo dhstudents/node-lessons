@@ -1,0 +1,60 @@
+https://www.youtube.com/watch?v=xT2AvjQ7q9E&list=PLvZkOAgBYrsQVc9PFn8mQ-xXef9zmy3kC&index=10
+Pure Node.Js REST Application
+> GET POST PUT and DElELTE
+WORK With RDBMS or NoSQL
+Follow a modular approch - supported by Node.Js
+Test REST with http tools
+
+
+REST Service with node server listen for all requests
+mysql RDBMS wiil be used
+
+
+Test with http tools
+postman
+browser
+fidlerr
+
+App -+
+     |
+     +- core
+        db.Js
+        httpMsg.Js
+        server.Js
+     +- controllers
+        employee.Js
+     app.js
+
+db name samplefornode
+CREATE TABLE `samplefornode`.`employees` (
+  `empid` INT NOT NULL,
+  `empname` CHAR(20) NULL,
+  `salary` INT NULL,
+  `department` INT NULL
+);
+
+INSERT INTO `samplefornode`.`employees`
+			(`empid`,`empname`,`salary`,`department`) 
+          VALUES (1001,'AAAAA',4300,10),
+				         (1002,'BBBBB',3400,10),
+				         (1003,'CCCCC',4500,20),
+				         (1004,'DDDDD',5600,10),
+				         (1005,'EEEEE',2300,30),
+				         (1006,'FFFFF',7600,20);
+
+1001, '' , 4300 , 10
+1002, '' , 3400 , 10
+1003, '' , 4500 , 20
+1004, '' , 5600 , 10
+1005 , '' , 2300 , 30
+1006, '' , 7600 , 20
+
+
+
+
+
+Employees
+empid        int
+empname      char(20) 
+salary       int
+department   int
